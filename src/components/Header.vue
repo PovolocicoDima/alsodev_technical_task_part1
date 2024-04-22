@@ -3,7 +3,6 @@ import { ref } from 'vue'
 import Logo from '@/components/ui/Logo.vue'
 import InputAdress from '@/components/ui/InputAdress.vue'
 import Button from '@/components/ui/Button.vue'
-// import ModalAuth from '@/components/ModalAuth.vue'
 
 const modalAuth = ref(null)
 const isModalOpen = ref(false)

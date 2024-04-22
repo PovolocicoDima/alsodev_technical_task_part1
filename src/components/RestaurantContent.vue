@@ -1,6 +1,6 @@
 <script setup>
 import { usePartnerStore } from '@/store/usePartner'
-import { computed, onMounted, reactive, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import ProductCard from '@/components/ProductCard.vue'
 

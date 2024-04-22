@@ -26,7 +26,7 @@ export const usePartnerStore = defineStore({
     getPartnersData(name) {
       const allPartnersStore = useAllPartnersStore()
       const partners = allPartnersStore.partners
-      return partners.filter((partner) => partner.name === name)[0]
+      return partners.find((partner) => partner.name === name)
     },
   },
 })
