@@ -1,10 +1,22 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Partner from '@/components/Partner.vue'
-import App from '@/App.vue'
 
 const routes = [
-  { path: '/', component: App, name: 'Home' },
-  { path: '/partners/:partnerName', component: Partner },
+  {
+    path: '/',
+    component: () => import('@/App.vue'),
+    name: 'Home',
+    exact: true,
+  },
+  {
+    path: '/partners/:partnerName',
+    exact: true,
+    component: () => import('@/components/PartnerCard.vue'),
+    props: true,
+  },
+  {
+    path: '/:catchAll(.*)',
+    redirect: '/404',
+  },
 ]
 
 const router = createRouter({

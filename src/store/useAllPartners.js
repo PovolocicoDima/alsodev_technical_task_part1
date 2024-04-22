@@ -8,14 +8,14 @@ export const useAllPartnersStore = defineStore({
   actions: {
     async fetchPartners() {
       try {
-        const response = await fetch('/api/partners')
+        const response = await fetch('/db/partners.json')
         if (!response.ok) {
           throw new Error('Failed to fetch partners')
         }
-        const partners = await response.json()
-        this.setPartners(partners)
+        const partnersData = await response.json()
+        this.partners = partnersData
       } catch (error) {
-        console.error(error)
+        console.error('Error fetching partners:', error)
       }
     },
     setPartners(partners) {
