@@ -1,5 +1,5 @@
 <script setup>
-import PartnerCard from '@/components/PartnerCard.vue'
+import RestaurantCard from '@/components/RestaurantCard.vue'
 import { useAllPartnersStore } from '@/store/useAllPartners'
 import { onMounted, ref } from 'vue'
 const allPartnersStore = useAllPartnersStore()
@@ -15,8 +15,9 @@ onMounted(async () => {
   <section class="restaurants">
     <div class="section-heading">
       <h2 class="section-title">Рестораны</h2>
-      <label class="search">
+      <label class="search" for="search">
         <input
+          id="search"
           type="text"
           class="input input-search"
           placeholder="Поиск блюд и ресторанов"
@@ -24,7 +25,7 @@ onMounted(async () => {
       </label>
     </div>
     <div class="cards cards-restaurants">
-      <PartnerCard
+      <RestaurantCard
         v-for="partner in partnersData"
         :key="partner.id"
         :partner="partner"

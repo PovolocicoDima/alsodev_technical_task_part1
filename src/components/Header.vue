@@ -1,7 +1,21 @@
 <script setup>
-import Logo from '@/components/Logo.vue'
-import InputAdress from '@/components/InputAdress.vue'
-import Button from '@/components/Button.vue'
+import { ref } from 'vue'
+import Logo from '@/components/ui/Logo.vue'
+import InputAdress from '@/components/ui/InputAdress.vue'
+import Button from '@/components/ui/Button.vue'
+// import ModalAuth from '@/components/ModalAuth.vue'
+
+const modalAuth = ref(null)
+const isModalOpen = ref(false)
+
+const toggleModal = () => {
+  isModalOpen.value = !isModalOpen.value
+  if (isModalOpen.value) {
+    modalAuth.value.classList.add('is-open')
+  } else {
+    modalAuth.value.classList.remove('is-open')
+  }
+}
 </script>
 
 <template>
@@ -15,6 +29,7 @@ import Button from '@/components/Button.vue'
           class="button button-primary button-auth"
           label="Войти"
           iconClass="button-auth-svg"
+          @click="toggleModal"
         />
         <Button
           class="button button-cart"
@@ -29,5 +44,34 @@ import Button from '@/components/Button.vue'
         />
       </div>
     </header>
+  </div>
+
+  <div class="modal-auth" ref="modalAuth">
+    <div class="modal-dialog modal-dialog-auth">
+      <button class="close-auth" @click="toggleModal">&times;</button>
+      <form id="logInForm">
+        <fieldset class="modal-body">
+          <legend class="modal-title">Авторизация</legend>
+          <label class="label-auth">
+            <span>Логин</span>
+            <input id="login" type="text" />
+          </label>
+          <label class="label-auth">
+            <span>Пароль</span>
+            <input id="password" type="password" />
+          </label>
+        </fieldset>
+        <!-- /.modal-body -->
+        <div class="modal-footer">
+          <div class="footer-buttons">
+            <button class="button button-primary button-login" type="submit">
+              Войти
+            </button>
+          </div>
+        </div>
+      </form>
+      <!-- /.modal-footer -->
+    </div>
+    <!-- /.modal-dialog -->
   </div>
 </template>

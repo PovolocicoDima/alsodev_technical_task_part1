@@ -1,27 +1,18 @@
 import { defineStore } from 'pinia'
-import { router } from 'vue-router'
+import { useAllPartnersStore } from '@/store/useAllPartners'
 
 export const usePartnerStore = defineStore({
   id: 'partner',
   state: () => ({
-    partners: {},
+    menu: {},
+    data: {},
   }),
   actions: {
     async fetchPartner(partnerName) {
-      const allowedPartnerNames = [
-        'food-band',
-        'gusi-lebedi',
-        'palki-skalki',
-        'pizza-burger',
-        'pizza-plus',
-        'tanuki',
-      ]
       try {
-        const response = await fetch(`/db/${partnerName}`)
+        const response = await fetch(`/db/${partnerName}.json`)
         if (!response.ok) {
           throw new Error('Failed to fetch partner')
-        } else if (!allowedPartnerNames.includes(partnerName)) {
-          router.redirect('/404')
         }
         const partnerData = await response.json()
         this.setPartner(partnerName, partnerData)
@@ -30,7 +21,12 @@ export const usePartnerStore = defineStore({
       }
     },
     setPartner(partnerName, partnerData) {
-      this.partners[partnerName] = partnerData
+      this.menu[partnerName] = partnerData
+    },
+    getPartnersData(name) {
+      const allPartnersStore = useAllPartnersStore()
+      const partners = allPartnersStore.partners
+      return partners.filter((partner) => partner.name === name)[0]
     },
   },
 })
