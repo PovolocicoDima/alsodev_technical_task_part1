@@ -1,10 +1,15 @@
 <script setup>
-import { watch, computed, ref } from 'vue'
+import { watch, computed, ref, onMounted } from 'vue'
 import { useCartStore } from '@/store/useCartStore'
+import CartItem from '@/components/CartItem.vue'
 const cartStore = useCartStore()
 
 const modalCart = ref(null)
 const isCartModalOpen = computed(() => cartStore.isCartModalOpen)
+const cart = computed(() => cartStore.getCart)
+const getTotalPrice = computed(() => cartStore.getTotalPrice)
+const cartItemCount = computed(() => cartStore.cartItemCount)
+
 watch(isCartModalOpen, (state, oldState) => {
   if (state) {
     modalCart.value.classList.add('is-open')
@@ -12,6 +17,10 @@ watch(isCartModalOpen, (state, oldState) => {
     modalCart.value.classList.remove('is-open')
   }
 })
+
+// onMounted(() => {
+//   cartStore.get
+// })
 </script>
 
 <template>
@@ -25,52 +34,27 @@ watch(isCartModalOpen, (state, oldState) => {
       </div>
       <!-- /.modal-header -->
       <div class="modal-body">
-        <div class="food-row">
-          <span class="food-name">Ролл угорь стандарт</span>
-          <strong class="food-price">250 ₽</strong>
-          <div class="food-counter">
-            <button class="counter-button">-</button>
-            <span class="counter">1</span>
-            <button class="counter-button">+</button>
-          </div>
-        </div>
-        <!-- /.foods-row -->
-        <div class="food-row">
-          <span class="food-name">Ролл угорь стандарт</span>
-          <strong class="food-price">250 ₽</strong>
-          <div class="food-counter">
-            <button class="counter-button">-</button>
-            <span class="counter">1</span>
-            <button class="counter-button">+</button>
-          </div>
-        </div>
-        <!-- /.foods-row -->
-        <div class="food-row">
-          <span class="food-name">Ролл угорь стандарт</span>
-          <strong class="food-price">250 ₽</strong>
-          <div class="food-counter">
-            <button class="counter-button">-</button>
-            <span class="counter">1</span>
-            <button class="counter-button">+</button>
-          </div>
-        </div>
-        <!-- /.foods-row -->
-        <div class="food-row">
-          <span class="food-name">Ролл угорь стандарт</span>
-          <strong class="food-price">250 ₽</strong>
-          <div class="food-counter">
-            <button class="counter-button">-</button>
-            <span class="counter">1</span>
-            <button class="counter-button">+</button>
-          </div>
-        </div>
+        <template v-if="cartItemCount > 0">
+          <CartItem
+            v-for="product in cart"
+            :key="product.id"
+            :product="product"
+          />
+        </template>
+        <template v-else>Корзина пуста</template>
+
         <!-- /.foods-row -->
       </div>
       <!-- /.modal-body -->
       <div class="modal-footer">
-        <span class="modal-pricetag">1250 ₽</span>
+        <span class="modal-pricetag">{{ getTotalPrice }} ₽</span>
         <div class="footer-buttons">
-          <button class="button button-primary">Оформить заказ</button>
+          <button
+            class="button button-primary"
+            @click="cartStore.toggleModalOpen"
+          >
+            Оформить заказ
+          </button>
           <button class="button clear-cart" @click="cartStore.toggleModalOpen">
             Отмена
           </button>

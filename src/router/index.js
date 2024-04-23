@@ -3,23 +3,13 @@ import { createRouter, createWebHistory } from 'vue-router'
 const routes = [
   {
     path: '/',
-    component: () => import('@/layout/MainLayout.vue'),
     name: 'Home',
+    component: () => import('@/components/MainContent.vue'),
   },
   {
     path: '/restaurants/:id',
     name: 'restaurant',
-    component: () => import('@/layout/RestaurantLayout.vue'),
-    // middleware => () => {
-    //   const allowedPartnerNames = [
-    //     'food-band',
-    //     'gusi-lebedi',
-    //     'palki-skalki',
-    //     'pizza-burger',
-    //     'pizza-plus',
-    //     'tanuki',
-    //   ]
-    // }
+    component: () => import('@/components/RestaurantContent.vue'),
   },
   {
     path: '/:catchAll(.*)',

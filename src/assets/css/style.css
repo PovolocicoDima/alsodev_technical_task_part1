@@ -305,6 +305,13 @@ button {
     flex-wrap: wrap;
 }
 
+.card-sort{
+    display: flex;
+    margin-left: auto;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
 .card-buttons {
     display: flex;
     margin-top: 24px;

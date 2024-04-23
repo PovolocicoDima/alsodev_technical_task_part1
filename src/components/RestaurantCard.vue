@@ -10,11 +10,12 @@ const props = defineProps({
 })
 
 const restaurantKey = computed(() => props.partner.products.split('.')[0])
-const goToRestaurantPage = () =>
+const goToRestaurantPage = () => {
   router.push({
     name: 'restaurant',
     params: { id: restaurantKey.value, name: props.partner.name },
   })
+}
 </script>
 
 <template>

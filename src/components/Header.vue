@@ -1,5 +1,5 @@
 <script setup>
-import { ref, reactive, computed } from 'vue'
+import { ref, computed } from 'vue'
 import Logo from '@/components/ui/Logo.vue'
 import InputAdress from '@/components/ui/InputAdress.vue'
 import Button from '@/components/ui/Button.vue'
@@ -10,6 +10,7 @@ const userStore = useUserStore()
 const cartStore = useCartStore()
 const userName = ref(null)
 
+const cartItemCount = computed(() => cartStore.cartItemCount)
 const userNameText = computed(() => {
   if (userStore.getUserName) {
     userName.value
@@ -43,7 +44,7 @@ const logOut = () => {
         <Button
           v-if="userIsLoggedIn"
           class="button"
-          label="Корзина"
+          :label="`Корзина ${cartItemCount > 0 ? cartItemCount : ''}`"
           iconClass="button-cart-svg"
           id="cart-button"
           @click="cartStore.toggleModalOpen"

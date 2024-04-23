@@ -1,12 +1,15 @@
 import { defineStore } from 'pinia'
-import { useAllPartnersStore } from '@/store/useAllPartners'
 
 export const usePartnerStore = defineStore({
   id: 'partner',
   state: () => ({
     menu: {},
-    data: {},
+    info: {},
+    partnerName: '',
   }),
+  getters: {
+    getPartnerInfo: (state) => state.info,
+  },
   actions: {
     async fetchPartner(partnerName) {
       try {
@@ -21,12 +24,21 @@ export const usePartnerStore = defineStore({
       }
     },
     setPartner(partnerName, partnerData) {
+      this.partnerName = partnerName
       this.menu[partnerName] = partnerData
     },
-    getPartnersData(name) {
-      const allPartnersStore = useAllPartnersStore()
-      const partners = allPartnersStore.partners
-      return partners.find((partner) => partner.name === name)
+    setInfo(info) {
+      this.info = info
+    },
+    sortAscending() {
+      this.menu[this.partnerName] = this.menu[this.partnerName].sort(
+        (a, b) => a.price < b.price
+      )
+    },
+    sortDescending() {
+      this.menu[this.partnerName] = this.menu[this.partnerName].sort(
+        (a, b) => a.price > b.price
+      )
     },
   },
 })

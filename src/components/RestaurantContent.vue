@@ -1,20 +1,29 @@
 <script setup>
 import { usePartnerStore } from '@/store/usePartner'
-import { computed, onMounted, ref } from 'vue'
+import { useAllPartnersStore } from '@/store/useAllPartners'
+import { onMounted, ref, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import ProductCard from '@/components/ProductCard.vue'
+import Button from '@/components/ui/Button.vue'
 
 const route = useRoute()
-
 const partnerStore = usePartnerStore()
+const allPartnersStore = useAllPartnersStore()
 const partnersMenu = ref(null)
-const partnerData = computed(() =>
-  partnerStore.getPartnersData(route.params.name)
-)
+const partnerInfo = computed(() => partnerStore.getPartnerInfo)
 
 onMounted(async () => {
+  if (!allPartnersStore.partners.length) {
+    await allPartnersStore.fetchPartners()
+  }
   await partnerStore.fetchPartner(route.params.id)
   partnersMenu.value = partnerStore.menu[route.params.id]
+  const info = allPartnersStore.partners.find((partner) => {
+    const name = partner.products.split('.')[0]
+    return route.params.id === name
+  })
+
+  partnerStore.setInfo(info)
 })
 </script>
 
@@ -24,21 +33,34 @@ onMounted(async () => {
       <section class="menu">
         <div class="section-heading">
           <h2 class="section-title restaurant-title">
-            {{ route.params.name }}
+            {{ partnerInfo?.name }}
           </h2>
           <div class="card-info">
-            <div class="rating">{{ partnerData?.stars }}</div>
-            <div class="price">От {{ partnerData?.price }} ₽</div>
-            <div class="category">{{ partnerData?.kitchen }}</div>
+            <div class="rating">{{ partnerInfo?.stars }}</div>
+            <div class="price">От {{ partnerInfo?.price }} ₽</div>
+            <div class="category">{{ partnerInfo?.kitchen }}</div>
           </div>
           <!-- /.card-info -->
+
+          <div class="card-sort">
+            <Button
+              label="По возрастаню"
+              class="button button-primary button-auth"
+              @click="partnerStore.sortAscending"
+            />
+            <Button
+              label="По убыванию"
+              class="button button-primary button-auth"
+              @click="partnerStore.sortDescending"
+            />
+          </div>
         </div>
 
         <div class="cards cards-menu">
           <ProductCard
-            v-for="menu in partnersMenu"
-            :key="menu.id"
-            :menu="menu"
+            v-for="product in partnersMenu"
+            :key="product.id"
+            :product="product"
           />
         </div>
       </section>
