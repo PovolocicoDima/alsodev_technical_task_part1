@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue'
+import { useCartStore } from '@/store/useCartStore'
 import Button from '@/components/ui/Button.vue'
 
 defineProps({
@@ -9,6 +10,7 @@ defineProps({
   },
 })
 
+const cartStore = useCartStore()
 const modalCart = ref(null)
 const isModalOpen = ref(false)
 

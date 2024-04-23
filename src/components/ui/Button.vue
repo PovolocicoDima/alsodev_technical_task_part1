@@ -8,10 +8,6 @@ const props = defineProps({
     type: String,
     required: true,
   },
-  callback: {
-    type: Function,
-    required: false,
-  },
 })
 </script>
 
