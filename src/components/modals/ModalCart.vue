@@ -2,8 +2,8 @@
 import { watch, computed, ref, onMounted } from 'vue'
 import { useCartStore } from '@/store/useCartStore'
 import CartItem from '@/components/CartItem.vue'
-const cartStore = useCartStore()
 
+const cartStore = useCartStore()
 const modalCart = ref(null)
 const isCartModalOpen = computed(() => cartStore.isCartModalOpen)
 const cart = computed(() => cartStore.getCart)
@@ -17,10 +17,6 @@ watch(isCartModalOpen, (state, oldState) => {
     modalCart.value.classList.remove('is-open')
   }
 })
-
-// onMounted(() => {
-//   cartStore.get
-// })
 </script>
 
 <template>

@@ -1,7 +1,46 @@
-# Vue 3 + Vite
+# Alsodev Technical Task Part 1
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## Description
 
-## Recommended IDE Setup
+This project is the implementation of a technical task for Alsodev company. Developer: Dmitrii Povolocico.
 
-- [VS Code](https://code.visualstudio.com/) + [Vue - Official](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (previously Volar) and disable Vetur
+## How to Run the Project
+
+1. Clone the repository to your local machine:
+
+   ```bash
+   https
+
+   git clone https://github.com/PovolocicoDima/alsodev_technical_task_part1.git
+
+   ssh
+
+   git clone git@github.com:PovolocicoDima/alsodev_technical_task_part1.git
+   ```
+
+2. Navigate to the project directory:
+
+   ```bash
+   cd alsodev_technical_task_part1
+   ```
+
+3. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+4. Run the project:
+
+   ### In dev mode:
+
+   ```bash
+   npm run dev
+   ```
+
+   ### In production mode:
+
+   ```bash
+   npm run build
+   npm run preview
+   ```
