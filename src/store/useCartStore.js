@@ -20,6 +20,9 @@ export const useCartStore = defineStore({
       const newCart = cart.filter((i) => i.id !== itemId)
       localStorage.setItem('cart', JSON.stringify(newCart))
     },
+    toggleModalOpen() {
+      this.cartModalIsOpen = !this.cartModalIsOpen
+    },
     getTotalCount() {
       const cart = JSON.parse(localStorage.getItem('cart'))
       this.totalCount = cart.reduce((acc, item) => acc + item.price, 0)

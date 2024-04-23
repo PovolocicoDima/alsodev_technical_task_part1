@@ -4,34 +4,21 @@ import Logo from '@/components/ui/Logo.vue'
 import InputAdress from '@/components/ui/InputAdress.vue'
 import Button from '@/components/ui/Button.vue'
 import { useUserStore } from '@/store/useUserStore'
+import { useCartStore } from '@/store/useCartStore'
 
 const userStore = useUserStore()
-const modalAuth = ref(null)
+const cartStore = useCartStore()
 const userName = ref(null)
-const isModalOpen = ref(false)
 
-const toggleModal = () => {
-  isModalOpen.value = !isModalOpen.value
-  if (isModalOpen.value) {
-    modalAuth.value.classList.add('is-open')
-  } else {
-    modalAuth.value.classList.remove('is-open')
+const userNameText = computed(() => {
+  if (userStore.getUserName) {
+    userName.value
+      ? (userName.value.style.display = 'block')
+      : (userName.value.style.display = 'none')
+    return userStore.getUserName
   }
-}
-const userForm = reactive({
-  login: null,
-  password: null,
 })
-
-const userNameText = computed(() => userStore.getUserName)
 const userIsLoggedIn = computed(() => userStore.userIsLoggedIn)
-
-const submitAuthForm = (e) => {
-  e.preventDefault()
-  userStore.logIn(userForm)
-  userName.value.style.display = 'block'
-  toggleModal()
-}
 
 const logOut = () => {
   userStore.logOut()
@@ -50,7 +37,7 @@ const logOut = () => {
           label="Войти"
           class="button button-primary button-auth"
           iconClass="button-auth-svg"
-          @click="toggleModal"
+          @click="userStore.toggleModalOpen"
         />
         <span class="user-name" ref="userName"> {{ userNameText }}</span>
         <Button
@@ -59,6 +46,7 @@ const logOut = () => {
           label="Корзина"
           iconClass="button-cart-svg"
           id="cart-button"
+          @click="cartStore.toggleModalOpen"
         />
         <Button
           v-if="userIsLoggedIn"
@@ -69,34 +57,5 @@ const logOut = () => {
         />
       </div>
     </header>
-  </div>
-
-  <div class="modal-auth" ref="modalAuth">
-    <div class="modal-dialog modal-dialog-auth">
-      <button class="close-auth" @click="toggleModal">&times;</button>
-      <form id="logInForm" @submit="submitAuthForm">
-        <fieldset class="modal-body">
-          <legend class="modal-title">Авторизация</legend>
-          <label class="label-auth">
-            <span>Логин</span>
-            <input id="login" type="text" v-model="userForm.login" />
-          </label>
-          <label class="label-auth">
-            <span>Пароль</span>
-            <input id="password" type="password" v-model="userForm.password" />
-          </label>
-        </fieldset>
-        <!-- /.modal-body -->
-        <div class="modal-footer">
-          <div class="footer-buttons">
-            <button class="button button-primary button-login" type="submit">
-              Войти
-            </button>
-          </div>
-        </div>
-      </form>
-      <!-- /.modal-footer -->
-    </div>
-    <!-- /.modal-dialog -->
   </div>
 </template>

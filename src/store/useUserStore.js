@@ -5,10 +5,12 @@ export const useUserStore = defineStore({
   state: () => ({
     isLoggedIn: false,
     userName: '',
+    autModalIsOpen: false,
   }),
   getters: {
     userIsLoggedIn: (state) => state.isLoggedIn,
     getUserName: (state) => state.userName,
+    isAuthModalOpen: (state) => state.autModalIsOpen,
   },
   actions: {
     logIn(login) {
@@ -20,6 +22,9 @@ export const useUserStore = defineStore({
       localStorage.removeItem('user')
       this.userName = ''
       this.isLoggedIn = false
+    },
+    toggleModalOpen() {
+      this.autModalIsOpen = !this.autModalIsOpen
     },
     checkIsLoggedIn() {
       const user = JSON.parse(localStorage.getItem('user'))
