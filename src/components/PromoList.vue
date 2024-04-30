@@ -1,5 +1,5 @@
 <script setup>
-import Promo from '@/components/Promo.vue'
+import Promo from './Promo.vue'
 </script>
 
 <template>

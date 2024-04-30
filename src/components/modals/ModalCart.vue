@@ -1,7 +1,7 @@
 <script setup>
-import { watch, computed, ref, onMounted } from 'vue'
-import { useCartStore } from '@/store/useCartStore'
-import CartItem from '@/components/CartItem.vue'
+import { watch, computed, ref } from 'vue'
+import { useCartStore } from '../../store/useCartStore'
+import CartItem from '../CartItem.vue'
 
 const cartStore = useCartStore()
 const modalCart = ref(null)

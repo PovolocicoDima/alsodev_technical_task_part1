@@ -1,10 +1,10 @@
 <script setup>
-import { usePartnerStore } from '@/store/usePartner'
-import { useAllPartnersStore } from '@/store/useAllPartners'
 import { onMounted, ref, computed } from 'vue'
 import { useRoute } from 'vue-router'
-import ProductCard from '@/components/ProductCard.vue'
-import Button from '@/components/ui/Button.vue'
+import { useAllPartnersStore } from '../store/useAllPartners'
+import { usePartnerStore } from '../store/usePartner'
+import ProductCard from './ProductCard.vue'
+import Button from './ui/Button.vue'
 
 const route = useRoute()
 const partnerStore = usePartnerStore()

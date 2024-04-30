@@ -1,6 +1,6 @@
 <script setup>
-import Button from '@/components/ui/Button.vue'
-import { useCartStore } from '@/store/useCartStore.js'
+import Button from './ui/Button.vue'
+import { useCartStore } from '../store/useCartStore'
 
 const cartStore = useCartStore()
 defineProps({

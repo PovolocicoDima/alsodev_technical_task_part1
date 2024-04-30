@@ -1,6 +1,6 @@
 <script setup>
 import { computed, watch, ref, reactive } from 'vue'
-import { useUserStore } from '@/store/useUserStore'
+import { useUserStore } from '../../store/useUserStore'
 
 const userStore = useUserStore()
 const modalAuth = ref(null)

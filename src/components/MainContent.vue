@@ -1,6 +1,6 @@
 <script setup>
-import PromoList from '@/components/PromoList.vue'
-import RestaurantsList from '@/components/RestaurantsList.vue'
+import PromoList from './PromoList.vue'
+import RestaurantsList from './RestaurantsList.vue'
 </script>
 
 <template>

@@ -4,12 +4,12 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: () => import('@/components/MainContent.vue'),
+    component: () => import('../components/MainContent.vue'),
   },
   {
     path: '/restaurants/:id',
     name: 'restaurant',
-    component: () => import('@/components/RestaurantContent.vue'),
+    component: () => import('../components/RestaurantContent.vue'),
   },
   {
     path: '/:catchAll(.*)',

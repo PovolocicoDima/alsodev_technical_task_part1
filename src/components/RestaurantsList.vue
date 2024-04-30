@@ -1,8 +1,9 @@
 <script setup>
-import RestaurantCard from '@/components/RestaurantCard.vue'
-import ProductCard from '@/components/ProductCard.vue'
-import { useAllPartnersStore } from '@/store/useAllPartners'
 import { computed, onMounted, ref, watch } from 'vue'
+import { useAllPartnersStore } from '../store/useAllPartners'
+import RestaurantCard from './RestaurantCard.vue'
+import ProductCard from './ProductCard.vue'
+
 const allPartnersStore = useAllPartnersStore()
 const partnersData = computed(() => allPartnersStore.partners)
 const foundProduct = computed(() => allPartnersStore.getProductFoundStatus)

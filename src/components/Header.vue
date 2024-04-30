@@ -1,10 +1,10 @@
 <script setup>
 import { ref, computed } from 'vue'
-import Logo from '@/components/ui/Logo.vue'
-import InputAdress from '@/components/ui/InputAdress.vue'
-import Button from '@/components/ui/Button.vue'
-import { useUserStore } from '@/store/useUserStore'
-import { useCartStore } from '@/store/useCartStore'
+import Logo from './ui/Logo.vue'
+import InputAdress from './ui/InputAdress.vue'
+import Button from './ui/Button.vue'
+import { useUserStore } from '../store/useUserStore'
+import { useCartStore } from '../store/useCartStore'
 
 const userStore = useUserStore()
 const cartStore = useCartStore()
